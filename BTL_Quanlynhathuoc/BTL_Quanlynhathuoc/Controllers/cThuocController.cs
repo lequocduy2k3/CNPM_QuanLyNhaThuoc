@@ -17,6 +17,7 @@ namespace BTL_Quanlynhathuoc.Controllers
         // Trang chính, trả về danh sách thuốc
         public ActionResult Index()
         {
+
             var thuocs = db.tblThuocs.ToList();
             return View("vThuoc", thuocs);
         }
@@ -24,6 +25,7 @@ namespace BTL_Quanlynhathuoc.Controllers
         // Hiển thị trang quản lý thuốc
         public ActionResult vThuoc()
         {
+
             var thuocs = db.tblThuocs.ToList(); // Lấy danh sách thuốc
             return View(thuocs); // Trả về view vThuoc.cshtml
         }
@@ -32,57 +34,104 @@ namespace BTL_Quanlynhathuoc.Controllers
         [HttpPost]
         public ActionResult Add(tblThuoc thuoc)
         {
-            // Kiểm tra mã nhà cung cấp
-            var existingNCC = db.tblNhaCungCaps.Find(thuoc.smaNCC);
-            if (existingNCC == null)
+            try
             {
-                return Json(new { success = false, error = "Mã nhà cung cấp không hợp lệ." });
-            }
+                // Kiểm tra mã nhà cung cấp
+                var existingNCC = db.tblNhaCungCaps.Find(thuoc.smaNCC);
+                if (existingNCC == null)
+                {
+                    return Json(new { success = false, error = "Mã nhà cung cấp không hợp lệ." });
+                }
 
-            // Kiểm tra mã thuốc đã tồn tại
-            var existingThuoc = db.tblThuocs.FirstOrDefault(t => t.smaThuoc == thuoc.smaThuoc);
-            if (existingThuoc != null)
+                // Kiểm tra mã thuốc đã tồn tại
+                var existingThuoc = db.tblThuocs.FirstOrDefault(t => t.smaThuoc == thuoc.smaThuoc);
+                if (existingThuoc != null)
+                {
+                    return Json(new { success = false, error = "Mã thuốc đã tồn tại." });
+                }
+
+                // Kiểm tra mã loại thuốc
+                var existingLoaiThuoc = db.tblLoaiThuocs.Find(thuoc.smaLoaiThuoc);
+                if (existingLoaiThuoc == null)
+                {
+                    return Json(new { success = false, error = "Mã loại thuốc không hợp lệ." });
+                }
+
+                // Thêm thuốc vào cơ sở dữ liệu
+                db.tblThuocs.Add(thuoc);
+                db.SaveChanges();
+
+                // Trả về các thuộc tính cần thiết của đối tượng thuoc để tránh lỗi JSON hóa
+                return Json(new
+                {
+                    success = true,
+                    thuoc = new
+                    {
+                        thuoc.smaThuoc,
+                        thuoc.stenThuoc,
+                        thuoc.smaNCC,
+                        thuoc.smaLoaiThuoc,
+                        thuoc.isoLuong,
+                        thuoc.fgiaThuoc
+                    }
+                });
+            }
+            catch (Exception ex)
             {
-                return Json(new { success = false, error = "Mã thuốc đã tồn tại." });
+                // Trả về thông tin lỗi chi tiết cho client nếu xảy ra lỗi bất ngờ
+                return Json(new { success = false, error = "Lỗi khi thêm thuốc: " + ex.Message });
             }
-
-            // Kiểm tra mã loại thuốc
-            var existingLoaiThuoc = db.tblLoaiThuocs.Find(thuoc.smaLoaiThuoc);
-            if (existingLoaiThuoc == null)
-            {
-                return Json(new { success = false, error = "Mã loại thuốc không hợp lệ." });
-            }
-
-            // Thêm thuốc vào cơ sở dữ liệu
-            db.tblThuocs.Add(thuoc);
-            db.SaveChanges();
-
-            return Json(new { success = true, thuoc });
         }
 
-        // Cập nhật thông tin thuốc
         [HttpPost]
+
         public ActionResult Update(tblThuoc thuoc)
         {
-            var thuocDB = db.tblThuocs.FirstOrDefault(row => row.smaThuoc == thuoc.smaThuoc);
-            if (thuocDB == null)
+            if (thuoc == null)
             {
-                Response.StatusCode = (int)HttpStatusCode.NotFound;
-                return Json(new { error = "Không tìm thấy thuốc." });
+                return Json(new { success = false, error = "Thông tin thuốc không hợp lệ." });
             }
 
-            // Cập nhật thông tin thuốc
+            var thuocDB = db.tblThuocs.Find(thuoc.smaThuoc);
+            if (thuocDB == null)
+            {
+                return Json(new { success = false, error = "Không tìm thấy thuốc." });
+            }
+
             thuocDB.stenThuoc = thuoc.stenThuoc;
             thuocDB.smaNCC = thuoc.smaNCC;
+            thuocDB.smaLoaiThuoc = thuoc.smaLoaiThuoc;
             thuocDB.fgiaThuoc = thuoc.fgiaThuoc;
             thuocDB.isoLuong = thuoc.isoLuong;
-            thuocDB.smaLoaiThuoc = thuoc.smaLoaiThuoc;
 
             db.SaveChanges();
-            return Json(new { success = true });
+            return Json(new { success = true, thuoc = thuocDB });
         }
 
-        // Xóa thuốc dựa trên mã thuốc
+        public ActionResult GetDrug(string smaThuoc)
+        {
+            // Kiểm tra xem mã thuốc có hợp lệ không
+            if (string.IsNullOrEmpty(smaThuoc))
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Mã thuốc không hợp lệ.");
+            }
+
+            // Tìm kiếm thuốc trong cơ sở dữ liệu
+            var thuoc = db.tblThuocs.FirstOrDefault(row => row.smaThuoc == smaThuoc);
+            if (thuoc == null)
+            {
+                Response.StatusCode = (int)HttpStatusCode.NotFound;
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Không tìm thấy thuốc.");
+            }
+
+            // Nếu tìm thấy, có thể trả về trạng thái thành công mà không cần dữ liệu
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+
+
+
         [HttpPost]
         public ActionResult Delete(string sMathuoc)
         {
@@ -98,5 +147,8 @@ namespace BTL_Quanlynhathuoc.Controllers
             db.SaveChanges();
             return Json(new { success = true });
         }
+
+
+
     }
 }

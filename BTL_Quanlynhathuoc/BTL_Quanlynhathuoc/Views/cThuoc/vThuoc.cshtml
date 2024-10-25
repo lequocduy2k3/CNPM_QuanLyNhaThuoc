@@ -83,7 +83,7 @@
             <h2 id="modaltitle" class="mb-2">Thêm Thuốc Mới</h2>
             <form action="@Url.Action("add", "cThuoc")" id="bookform" method="post">
                 <p id="labelmathuoc" class="label">Mã Thuốc:</p>
-                <input type="text" id="smathuoc" name="smathuoc" placeholder="Nhập mã thuốc" oninput="validateinput(event)" maxlength="10">
+                <input type="text" id="smathuoc" name="smathuoc" placeholder="Nhập mã thuốc" oninput="validateInput(event)" maxlength="10">
                 <p id="errormathuoc" class="error"></p>
 
                 <p class="label">Tên Thuốc:</p>
@@ -152,7 +152,7 @@ function clearForm() {
     document.getElementById('modaltitle').textContent = "Thêm Thuốc Mới";
 
     // Thiết lập action của form
-    document.getElementById('bookform').action = '@Url.Action("Add", "cThuoc")'; // Đảm bảo đúng action
+    document.getElementById('bookform').action = '@Url.Action("add", "cThuoc")'; // Đảm bảo đúng action
 
     // Cập nhật nút
     document.getElementById('thuocmodalbtn').textContent = "Thêm";
@@ -169,10 +169,9 @@ function resetError() {
     document.getElementById("errorgiathuoc").innerHTML = "";
     document.getElementById("errorsoluong").innerHTML = "";
 }
+       
 
-// Trong form thêm mới
-// Trong form thêm mới
-$('#bookform').submit(function (event) {
+    $('#bookform').submit(function (event) {
     event.preventDefault(); // Ngăn chặn hành động mặc định của form
 
     resetError(); // Đặt lại các lỗi trước khi kiểm tra
@@ -187,10 +186,13 @@ $('#bookform').submit(function (event) {
     let smaLoaiThuoc = $('#smaloaithuoc').val();
     let iSoLuong = $('#isoluong').val();
     let fGiaThuoc = $('#fgiathuoc').val();
+    let editMode = $('#editMode').val(); // Kiểm tra chế độ chỉnh sửa
 
-    // Gửi yêu cầu AJAX để thêm thuốc
+    let url = editMode === "true" ? '@Url.Action("Update", "cThuoc")' : '@Url.Action("Add", "cThuoc")';
+
+    // Gửi yêu cầu AJAX để thêm hoặc sửa thuốc
     $.ajax({
-        url: '@Url.Action("Add", "cThuoc")', // URL action cho thêm thuốc
+        url: url,
         type: 'POST',
         data: {
             smaThuoc: smaThuoc,
@@ -198,50 +200,53 @@ $('#bookform').submit(function (event) {
             smaNCC: smaNCC,
             smaLoaiThuoc: smaLoaiThuoc,
             iSoLuong: iSoLuong,
-            fGiaThuoc: fGiaThuoc
+            fGiaThuoc: fGiaThuoc,
+            originalSmaThuoc: editMode === "true" ? $('#originalSmaThuoc').val() : null // Gửi mã thuốc gốc nếu đang sửa
         },
         success: function (response) {
-            try {
-                // Parse JSON nếu response chưa phải JSON object
-                let result = typeof response === "string" ? JSON.parse(response) : response;
+            let result = typeof response === "string" ? JSON.parse(response) : response;
 
-                if (result.success) {
-                    // Cập nhật danh sách thuốc mà không cần tải lại trang
-                    addToDrugList(result.thuoc); // Gọi hàm thêm thuốc vào danh sách
-                    alert(`Thuốc ${stenThuoc} đã được thêm thành công!`);
+            if (result.success) {
+                if (editMode === "true") {
+                    alert(`Thuốc ${stenThuoc} đã được sửa thành công!`);
+                    // Cập nhật danh sách thuốc
+                    updateDrugList(result.thuoc);
                 } else {
-                    alert(result.error || 'Thêm thuốc không thành công, vui lòng thử lại!');
+                    alert(`Thuốc ${stenThuoc} đã được thêm thành công!`);
+                    addToDrugList(result.thuoc);
                 }
-            } catch (e) {
-                console.error("Parse error:", e);
-                alert("Lỗi xử lý phản hồi từ server.");
+                clearForm(); // Đóng modal và xóa form
+                $('#thuocmodal').css('display', 'none');
+            } else {
+                alert(result.error || 'Thêm/Sửa thuốc không thành công, vui lòng thử lại!');
             }
         },
-        error: function (xhr, status, error) {
-            console.error("AJAX error:", error);
-            alert('Thêm thuốc không thành công, vui lòng thử lại!');
+        error: function (xhr) {
+            console.error("Lỗi AJAX:", xhr.responseText);
+            alert('Thêm/Sửa thuốc không thành công, vui lòng thử lại!');
         }
     });
 });
 
 
-        // Hàm thêm thuốc vào danh sách
-        function addToDrugList(thuoc) {
-            const drugList = document.getElementById('thuocTable').getElementsByTagName('tbody')[0]; // Lấy phần tử tbody
-            const newRow = document.createElement('tr'); // Tạo một dòng mới trong bảng
-            newRow.innerHTML = `
+
+// Hàm thêm thuốc vào danh sách
+function addToDrugList(thuoc) {
+    const drugList = document.getElementById('thuocTable').getElementsByTagName('tbody')[0]; // Lấy phần tử tbody
+    const newRow = document.createElement('tr'); // Tạo một dòng mới trong bảng
+    newRow.innerHTML = `
         <td>${thuoc.smaThuoc}</td>
         <td>${thuoc.stenThuoc}</td>
         <td>${thuoc.smaNCC}</td>
         <td>${thuoc.smaLoaiThuoc}</td>
-        <td>${thuoc.iSoLuong}</td>
-        <td>${thuoc.fGiaThuoc}</td>
+        <td>${thuoc.isoLuong}</td>
+        <td>${thuoc.fgiaThuoc}</td>
         <td class="action-buttons">
             <button class="btn btn-secondary" onclick="onUpdate('${thuoc.smaThuoc}')">Sửa</button>
             <button class="btn btn-danger" onclick="confirmDelete('${thuoc.smaThuoc}', '${thuoc.stenThuoc}')">Xóa</button>
         </td> `;
-            drugList.appendChild(newRow); // Thêm dòng mới vào danh sách thuốc
-        }
+    drugList.appendChild(newRow); // Thêm dòng mới vào danh sách thuốc
+}
 
 
        function checkValid() {
@@ -360,51 +365,38 @@ function checkContainString(string) {
             return regex.test(string);
         }
 
+// Hàm sửa thuốc
+function onUpdate(smaThuoc) {
+    $.ajax({
+        url: '@Url.Action("GetDrug", "cThuoc")', // URL action để lấy thông tin thuốc
+        type: 'GET',
+        data: { smaThuoc: smaThuoc },
+        success: function (drug) {
+            // Điền thông tin thuốc vào form
+            document.getElementById('smathuoc').value = drug.smaThuoc;
+            document.getElementById('stenthuoc').value = drug.stenThuoc;
+            document.getElementById('smancc').value = drug.smaNCC;
+            document.getElementById('smaloaithuoc').value = drug.smaLoaiThuoc;
+            document.getElementById('isoluong').value = drug.isoLuong;
+            document.getElementById('fgiathuoc').value = drug.fgiaThuoc;
 
-        function onUpdate(smaThuoc) {
-     console.log("Hàm onUpdate đã được gọi với mã thuốc: " + smaThuoc);
-    // Thiết lập tiêu đề và nút trong modal
-    document.getElementById('modaltitle').textContent = "Sửa Thuốc";
-    document.getElementById('bookform').action = "@Url.Action("Update", "cThuoc")"; // Đường dẫn cập nhật chính xác
-    document.getElementById('thuocmodalbtn').textContent = "Sửa"; // Thay đổi nút thành "Sửa"
+            // Cập nhật tiêu đề modal
+            document.getElementById('modaltitle').textContent = "Sửa Thuốc";
 
-    // Lấy danh sách thuốc từ ViewBag
-    var listThuoc = @Html.Raw(ViewBag.JsonListThuoc);
+            // Thiết lập action của form để sửa thuốc
+            document.getElementById('bookform').action = '@Url.Action("Update", "cThuoc")';
 
-    // Kiểm tra danh sách thuốc có tồn tại và không rỗng
-    if (Array.isArray(listThuoc) && listThuoc.length > 0) {
-        // Tìm thuốc theo mã
-        var thuoc = listThuoc.find(function(t) { return t.smaThuoc === smaThuoc; });
+            // Cập nhật nút
+            document.getElementById('thuocmodalbtn').textContent = "Cập nhật";
 
-        // Nếu thuốc tồn tại, điền thông tin vào form
-        if (thuoc) {
-            // Ẩn label mã thuốc và chuyển đổi input mã thuốc thành hidden
-            var maThuocInput = document.getElementById('smathuoc');
-            maThuocInput.type = "hidden";
-            document.getElementById('labelmathuoc').style.display = "none";
-
-            // Hiển thị modal sửa thuốc
+            // Mở modal
             $('#thuocmodal').css('display', 'block');
-
-            // Điền thông tin thuốc vào các input
-            maThuocInput.value = thuoc.smaThuoc;
-            document.getElementById('stenthuoc').value = thuoc.stenThuoc;
-            document.getElementById('smancc').value = thuoc.smaNCC;
-            document.getElementById('smaloaithuoc').value = thuoc.smaLoaiThuoc;
-            document.getElementById('isoluong').value = thuoc.isoLuong;
-            document.getElementById('fgiathuoc').value = thuoc.fgiaThuoc;
-        } else {
-            // Hiển thị thông báo nếu không tìm thấy thuốc
-            console.error('Không tìm thấy thuốc với mã: ' + smaThuoc);
-            alert('Không tìm thấy thuốc với mã: ' + smaThuoc);
+        },
+        error: function () {
+            alert('Không thể lấy thông tin thuốc để sửa!');
         }
-    } else {
-        // Hiển thị thông báo nếu danh sách thuốc không hợp lệ
-        console.error('Danh sách thuốc trống hoặc không hợp lệ');
-        alert('Danh sách thuốc trống hoặc không hợp lệ');
-    }
+    });
 }
-
 
     </script>
 
