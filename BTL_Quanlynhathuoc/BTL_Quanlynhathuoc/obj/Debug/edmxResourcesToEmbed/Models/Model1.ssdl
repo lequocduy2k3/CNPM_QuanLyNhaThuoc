@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QUANLYNHATHUOCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblChiTietDT">
+    <Key>
+      <PropertyRef Name="imaHD" />
+      <PropertyRef Name="smaThuoc" />
+    </Key>
+    <Property Name="imaHD" Type="int" Nullable="false" />
+    <Property Name="smaThuoc" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="fGiaBan" Type="float" />
+    <Property Name="isoLuong" Type="float" />
+    <Property Name="fChietKhau" Type="float" />
+  </EntityType>
+  <EntityType Name="tblChiTietHDNhapthuoc">
+    <Key>
+      <PropertyRef Name="imaHD" />
+      <PropertyRef Name="smaThuoc" />
+    </Key>
+    <Property Name="imaHD" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="smaThuoc" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="fGiaNhap" Type="float" />
+    <Property Name="isoLuongNhap" Type="int" />
+  </EntityType>
+  <EntityType Name="tblDonThuoc">
+    <Key>
+      <PropertyRef Name="imaHD" />
+    </Key>
+    <Property Name="imaHD" Type="int" Nullable="false" />
+    <Property Name="smaNV" Type="varchar" MaxLength="10" />
+    <Property Name="smaKH" Type="varchar" MaxLength="10" />
+    <Property Name="dngayLapHD" Type="date" />
+    <Property Name="dngayGiaoHang" Type="date" />
+    <Property Name="sDiaChiGH" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="tblHoaDonNhapThuoc">
+    <Key>
+      <PropertyRef Name="imaHD" />
+    </Key>
+    <Property Name="imaHD" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="smaNV" Type="varchar" MaxLength="10" />
+    <Property Name="dngayHD" Type="date" />
+  </EntityType>
+  <EntityType Name="tblKhachHang">
+    <Key>
+      <PropertyRef Name="smaKH" />
+    </Key>
+    <Property Name="smaKH" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="stenKH" Type="nvarchar" MaxLength="30" />
+    <Property Name="dngaySinh" Type="date" />
+    <Property Name="sDiaChi" Type="nvarchar" MaxLength="30" />
+    <Property Name="sSDT" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tblLoaiThuoc">
+    <Key>
+      <PropertyRef Name="smaLoaiThuoc" />
+    </Key>
+    <Property Name="smaLoaiThuoc" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="stenLoaiThuoc" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="tblNhaCungCap">
+    <Key>
+      <PropertyRef Name="smaNCC" />
+    </Key>
+    <Property Name="smaNCC" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="stenNCC" Type="nvarchar" MaxLength="30" />
+    <Property Name="stenGiaoDich" Type="nvarchar" MaxLength="30" />
+    <Property Name="sDiaChi" Type="nvarchar" MaxLength="20" />
+    <Property Name="sSDT" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="tblNhanVien">
+    <Key>
+      <PropertyRef Name="smaNV" />
+    </Key>
+    <Property Name="smaNV" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="stenNV" Type="nvarchar" MaxLength="30" />
+    <Property Name="dngaySinh" Type="date" />
+    <Property Name="bgioiTinh" Type="bit" />
+    <Property Name="squeQuan" Type="nvarchar" MaxLength="30" />
+    <Property Name="dngayVL" Type="date" />
+    <Property Name="fluongCB" Type="float" />
+    <Property Name="iphuCap" Type="float" />
+  </EntityType>
+  <EntityType Name="tblTaiKhoan">
+    <Key>
+      <PropertyRef Name="smaNV" />
+    </Key>
+    <Property Name="smaNV" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="smatKhau" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="tblThuoc">
+    <Key>
+      <PropertyRef Name="smaThuoc" />
+    </Key>
+    <Property Name="smaThuoc" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="stenThuoc" Type="nvarchar" MaxLength="30" />
+    <Property Name="smaNCC" Type="varchar" MaxLength="10" />
+    <Property Name="smaLoaiThuoc" Type="varchar" MaxLength="10" />
+    <Property Name="isoLuong" Type="int" />
+    <Property Name="fgiaThuoc" Type="float" />
+  </EntityType>
+  <Association Name="FK_ChiTietDT_HoaDonBan">
+    <End Role="tblDonThuoc" Type="Self.tblDonThuoc" Multiplicity="1" />
+    <End Role="tblChiTietDT" Type="Self.tblChiTietDT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDonThuoc">
+        <PropertyRef Name="imaHD" />
+      </Principal>
+      <Dependent Role="tblChiTietDT">
+        <PropertyRef Name="imaHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChiTietDT_SanPham">
+    <End Role="tblThuoc" Type="Self.tblThuoc" Multiplicity="1" />
+    <End Role="tblChiTietDT" Type="Self.tblChiTietDT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblThuoc">
+        <PropertyRef Name="smaThuoc" />
+      </Principal>
+      <Dependent Role="tblChiTietDT">
+        <PropertyRef Name="smaThuoc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChiTietHDNhapThuoc_HoaDonNhapThuoc">
+    <End Role="tblHoaDonNhapThuoc" Type="Self.tblHoaDonNhapThuoc" Multiplicity="1" />
+    <End Role="tblChiTietHDNhapthuoc" Type="Self.tblChiTietHDNhapthuoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHoaDonNhapThuoc">
+        <PropertyRef Name="imaHD" />
+      </Principal>
+      <Dependent Role="tblChiTietHDNhapthuoc">
+        <PropertyRef Name="imaHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChiTietHDNhapThuoc_SanPham">
+    <End Role="tblThuoc" Type="Self.tblThuoc" Multiplicity="1" />
+    <End Role="tblChiTietHDNhapthuoc" Type="Self.tblChiTietHDNhapthuoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblThuoc">
+        <PropertyRef Name="smaThuoc" />
+      </Principal>
+      <Dependent Role="tblChiTietHDNhapthuoc">
+        <PropertyRef Name="smaThuoc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DonThuoc_KhachHang">
+    <End Role="tblKhachHang" Type="Self.tblKhachHang" Multiplicity="0..1" />
+    <End Role="tblDonThuoc" Type="Self.tblDonThuoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKhachHang">
+        <PropertyRef Name="smaKH" />
+      </Principal>
+      <Dependent Role="tblDonThuoc">
+        <PropertyRef Name="smaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DonThuoc_NhanVien">
+    <End Role="tblNhanVien" Type="Self.tblNhanVien" Multiplicity="0..1" />
+    <End Role="tblDonThuoc" Type="Self.tblDonThuoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNhanVien">
+        <PropertyRef Name="smaNV" />
+      </Principal>
+      <Dependent Role="tblDonThuoc">
+        <PropertyRef Name="smaNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HoaDonNhapThuoc_NhanVien">
+    <End Role="tblNhanVien" Type="Self.tblNhanVien" Multiplicity="0..1" />
+    <End Role="tblHoaDonNhapThuoc" Type="Self.tblHoaDonNhapThuoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNhanVien">
+        <PropertyRef Name="smaNV" />
+      </Principal>
+      <Dependent Role="tblHoaDonNhapThuoc">
+        <PropertyRef Name="smaNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaiKhoan_NhanVien">
+    <End Role="tblNhanVien" Type="Self.tblNhanVien" Multiplicity="1" />
+    <End Role="tblTaiKhoan" Type="Self.tblTaiKhoan" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblNhanVien">
+        <PropertyRef Name="smaNV" />
+      </Principal>
+      <Dependent Role="tblTaiKhoan">
+        <PropertyRef Name="smaNV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Thuoc">
+    <End Role="tblLoaiThuoc" Type="Self.tblLoaiThuoc" Multiplicity="0..1" />
+    <End Role="tblThuoc" Type="Self.tblThuoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLoaiThuoc">
+        <PropertyRef Name="smaLoaiThuoc" />
+      </Principal>
+      <Dependent Role="tblThuoc">
+        <PropertyRef Name="smaLoaiThuoc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Thuoc_NhaCungCap">
+    <End Role="tblNhaCungCap" Type="Self.tblNhaCungCap" Multiplicity="0..1" />
+    <End Role="tblThuoc" Type="Self.tblThuoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNhaCungCap">
+        <PropertyRef Name="smaNCC" />
+      </Principal>
+      <Dependent Role="tblThuoc">
+        <PropertyRef Name="smaNCC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QUANLYNHATHUOCModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblChiTietDT" EntityType="Self.tblChiTietDT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblChiTietHDNhapthuoc" EntityType="Self.tblChiTietHDNhapthuoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDonThuoc" EntityType="Self.tblDonThuoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHoaDonNhapThuoc" EntityType="Self.tblHoaDonNhapThuoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblKhachHang" EntityType="Self.tblKhachHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLoaiThuoc" EntityType="Self.tblLoaiThuoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNhaCungCap" EntityType="Self.tblNhaCungCap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNhanVien" EntityType="Self.tblNhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTaiKhoan" EntityType="Self.tblTaiKhoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblThuoc" EntityType="Self.tblThuoc" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ChiTietDT_HoaDonBan" Association="Self.FK_ChiTietDT_HoaDonBan">
+      <End Role="tblDonThuoc" EntitySet="tblDonThuoc" />
+      <End Role="tblChiTietDT" EntitySet="tblChiTietDT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChiTietDT_SanPham" Association="Self.FK_ChiTietDT_SanPham">
+      <End Role="tblThuoc" EntitySet="tblThuoc" />
+      <End Role="tblChiTietDT" EntitySet="tblChiTietDT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChiTietHDNhapThuoc_HoaDonNhapThuoc" Association="Self.FK_ChiTietHDNhapThuoc_HoaDonNhapThuoc">
+      <End Role="tblHoaDonNhapThuoc" EntitySet="tblHoaDonNhapThuoc" />
+      <End Role="tblChiTietHDNhapthuoc" EntitySet="tblChiTietHDNhapthuoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChiTietHDNhapThuoc_SanPham" Association="Self.FK_ChiTietHDNhapThuoc_SanPham">
+      <End Role="tblThuoc" EntitySet="tblThuoc" />
+      <End Role="tblChiTietHDNhapthuoc" EntitySet="tblChiTietHDNhapthuoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DonThuoc_KhachHang" Association="Self.FK_DonThuoc_KhachHang">
+      <End Role="tblKhachHang" EntitySet="tblKhachHang" />
+      <End Role="tblDonThuoc" EntitySet="tblDonThuoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DonThuoc_NhanVien" Association="Self.FK_DonThuoc_NhanVien">
+      <End Role="tblNhanVien" EntitySet="tblNhanVien" />
+      <End Role="tblDonThuoc" EntitySet="tblDonThuoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HoaDonNhapThuoc_NhanVien" Association="Self.FK_HoaDonNhapThuoc_NhanVien">
+      <End Role="tblNhanVien" EntitySet="tblNhanVien" />
+      <End Role="tblHoaDonNhapThuoc" EntitySet="tblHoaDonNhapThuoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaiKhoan_NhanVien" Association="Self.FK_TaiKhoan_NhanVien">
+      <End Role="tblNhanVien" EntitySet="tblNhanVien" />
+      <End Role="tblTaiKhoan" EntitySet="tblTaiKhoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Thuoc" Association="Self.FK_Thuoc">
+      <End Role="tblLoaiThuoc" EntitySet="tblLoaiThuoc" />
+      <End Role="tblThuoc" EntitySet="tblThuoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Thuoc_NhaCungCap" Association="Self.FK_Thuoc_NhaCungCap">
+      <End Role="tblNhaCungCap" EntitySet="tblNhaCungCap" />
+      <End Role="tblThuoc" EntitySet="tblThuoc" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

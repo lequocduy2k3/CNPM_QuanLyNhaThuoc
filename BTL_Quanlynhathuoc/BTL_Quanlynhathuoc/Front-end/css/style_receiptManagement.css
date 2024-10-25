@@ -1,0 +1,82 @@
+﻿.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+    .btn-secondary:hover {
+        background-color: #27ae60;
+    }
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+#invoiceCheckGroup {
+    display: none;
+}
+
+#checkInvoiceBtn {
+    margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
