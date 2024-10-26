@@ -82,6 +82,8 @@
             <span class="close">&times;</span>
             <h2 id="modaltitle" class="mb-2">Thêm Thuốc Mới</h2>
             <form action="@Url.Action("add", "cThuoc")" id="bookform" method="post">
+                <input type="hidden" id="editMode" name="editMode" value="false">
+
                 <p id="labelmathuoc" class="label">Mã Thuốc:</p>
                 <input type="text" id="smathuoc" name="smathuoc" placeholder="Nhập mã thuốc" oninput="validateInput(event)" maxlength="10">
                 <p id="errormathuoc" class="error"></p>
@@ -159,6 +161,9 @@ function clearForm() {
 
     // Hiển thị label mã thuốc
     document.getElementById('labelmathuoc').style.display = "block";
+
+
+    document.getElementById('editMode').value = "false"; // Đặt chế độ thêm mới
 }
 
 function resetError() {
@@ -228,6 +233,18 @@ function resetError() {
     });
 });
 
+        function updateDrugList(updatedDrug) {
+            const rows = document.querySelectorAll('#thuocTable tbody tr');
+            rows.forEach(row => {
+                if (row.cells[0].textContent === updatedDrug.smaThuoc) {
+                    row.cells[1].textContent = updatedDrug.stenThuoc;
+                    row.cells[2].textContent = updatedDrug.smaNCC;
+                    row.cells[3].textContent = updatedDrug.smaLoaiThuoc;
+                    row.cells[4].textContent = updatedDrug.isoLuong;
+                    row.cells[5].textContent = updatedDrug.fgiaThuoc;
+                }
+            });
+        }
 
 
 // Hàm thêm thuốc vào danh sách
@@ -372,14 +389,18 @@ function onUpdate(smaThuoc) {
         type: 'GET',
         data: { smaThuoc: smaThuoc },
         success: function (drug) {
+            document.getElementById('editMode').value = "true"; // Đặt chế độ cập nhật
+            // Các dòng khác để hiển thị modal cập nhật...
             // Điền thông tin thuốc vào form
-            document.getElementById('smathuoc').value = drug.smaThuoc;
-            document.getElementById('stenthuoc').value = drug.stenThuoc;
-            document.getElementById('smancc').value = drug.smaNCC;
-            document.getElementById('smaloaithuoc').value = drug.smaLoaiThuoc;
-            document.getElementById('isoluong').value = drug.isoLuong;
-            document.getElementById('fgiathuoc').value = drug.fgiaThuoc;
-
+            document.getElementById('smathuoc').value = drug.thuoc.smaThuoc;
+            document.getElementById('stenthuoc').value = drug.thuoc.stenThuoc;
+            document.getElementById('smancc').value = drug.thuoc.smaNCC;
+            document.getElementById('smaloaithuoc').value = drug.thuoc.smaLoaiThuoc;
+            document.getElementById('isoluong').value = drug.thuoc.isoLuong;
+            document.getElementById('fgiathuoc').value = drug.thuoc.fgiaThuoc;
+            // Ẩn mã thuốc trong cập nhật
+            document.getElementById('smathuoc').type = "hidden";
+            document.getElementById('labelmathuoc').style.display = "none";
             // Cập nhật tiêu đề modal
             document.getElementById('modaltitle').textContent = "Sửa Thuốc";
 

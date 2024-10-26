@@ -36,7 +36,6 @@ namespace BTL_Quanlynhathuoc.Controllers
         {
             try
             {
-                // Kiểm tra mã nhà cung cấp
                 var existingNCC = db.tblNhaCungCaps.Find(thuoc.smaNCC);
                 if (existingNCC == null)
                 {
@@ -44,8 +43,7 @@ namespace BTL_Quanlynhathuoc.Controllers
                 }
 
                 // Kiểm tra mã thuốc đã tồn tại
-                var existingThuoc = db.tblThuocs.FirstOrDefault(t => t.smaThuoc == thuoc.smaThuoc);
-                if (existingThuoc != null)
+                if (db.tblThuocs.Any(t => t.smaThuoc == thuoc.smaThuoc))
                 {
                     return Json(new { success = false, error = "Mã thuốc đã tồn tại." });
                 }
@@ -56,7 +54,6 @@ namespace BTL_Quanlynhathuoc.Controllers
                 {
                     return Json(new { success = false, error = "Mã loại thuốc không hợp lệ." });
                 }
-
                 // Thêm thuốc vào cơ sở dữ liệu
                 db.tblThuocs.Add(thuoc);
                 db.SaveChanges();
@@ -87,47 +84,76 @@ namespace BTL_Quanlynhathuoc.Controllers
 
         public ActionResult Update(tblThuoc thuoc)
         {
+            // Kiểm tra xem dữ liệu thuốc có hợp lệ không
             if (thuoc == null)
             {
                 return Json(new { success = false, error = "Thông tin thuốc không hợp lệ." });
             }
 
+            // Tìm kiếm thuốc trong cơ sở dữ liệu theo mã thuốc được gửi từ client
             var thuocDB = db.tblThuocs.Find(thuoc.smaThuoc);
             if (thuocDB == null)
             {
                 return Json(new { success = false, error = "Không tìm thấy thuốc." });
             }
 
+            // Cập nhật thông tin thuốc mà không kiểm tra mã thuốc trùng lặp
             thuocDB.stenThuoc = thuoc.stenThuoc;
             thuocDB.smaNCC = thuoc.smaNCC;
             thuocDB.smaLoaiThuoc = thuoc.smaLoaiThuoc;
             thuocDB.fgiaThuoc = thuoc.fgiaThuoc;
             thuocDB.isoLuong = thuoc.isoLuong;
 
+            // Lưu thay đổi vào cơ sở dữ liệu
             db.SaveChanges();
-            return Json(new { success = true, thuoc = thuocDB });
+
+            // Trả về kết quả cập nhật thành công
+            return Json(new
+            {
+                success = true,
+                thuoc = new
+                {
+                    thuocDB.smaThuoc,
+                    thuocDB.stenThuoc,
+                    thuocDB.smaNCC,
+                    thuocDB.smaLoaiThuoc,
+                    thuocDB.fgiaThuoc,
+                    thuocDB.isoLuong
+                }
+            });
         }
+
+
 
         public ActionResult GetDrug(string smaThuoc)
         {
-            // Kiểm tra xem mã thuốc có hợp lệ không
             if (string.IsNullOrEmpty(smaThuoc))
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Mã thuốc không hợp lệ.");
+                return Json(new { success = false, error = "Mã thuốc không hợp lệ." }, JsonRequestBehavior.AllowGet);
             }
 
-            // Tìm kiếm thuốc trong cơ sở dữ liệu
             var thuoc = db.tblThuocs.FirstOrDefault(row => row.smaThuoc == smaThuoc);
             if (thuoc == null)
             {
-                Response.StatusCode = (int)HttpStatusCode.NotFound;
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Không tìm thấy thuốc.");
+                return Json(new { success = false, error = "Không tìm thấy thuốc." }, JsonRequestBehavior.AllowGet);
             }
 
-            // Nếu tìm thấy, có thể trả về trạng thái thành công mà không cần dữ liệu
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            // Trả về thông tin thuốc
+            return Json(new
+            {
+                success = true,
+                thuoc = new
+                {
+                    thuoc.smaThuoc,
+                    thuoc.stenThuoc,
+                    thuoc.smaNCC,
+                    thuoc.smaLoaiThuoc,
+                    thuoc.fgiaThuoc,
+                    thuoc.isoLuong
+                }
+            }, JsonRequestBehavior.AllowGet);
         }
+
 
 
 
