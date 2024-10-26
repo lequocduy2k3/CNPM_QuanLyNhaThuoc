@@ -17,10 +17,10 @@
 <body>
     <div class="container">
         <h1>Quản lý Thuốc</h1>
-        <form action="@Url.Action("vThuoc", "cThuoc")" method="get">
+        <form action="@Url.Action("Search", "cThuoc")" method="get">
             <div class="book-actions">
                 <div class="search-bar">
-                    <input type="text" id="searchInput" name="searchInput" value="@ViewBag.Search" placeholder="Nhập tên Thuốc để tìm kiếm...">
+                    <input type="text" id="searchTerm" name="searchTerm" value="@ViewBag.Search" placeholder="Nhập tên Thuốc để tìm kiếm...">
                     <button id="searchBtn" type="submit" class="btn btn-secondary">Tìm kiếm</button>
                 </div>
             </div>
