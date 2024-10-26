@@ -175,6 +175,23 @@ namespace BTL_Quanlynhathuoc.Controllers
         }
 
 
+ public ActionResult Search(string searchTerm)
+ {
+     // Kiểm tra nếu searchTerm rỗng
+     if (string.IsNullOrWhiteSpace(searchTerm))
+     {
+         // Nếu không có từ khóa tìm kiếm, trả về danh sách thuốc đầy đủ
+         var thuocs = db.tblThuocs.ToList();
+         return View("vThuoc", thuocs);
+     }
 
+     // Tìm kiếm thuốc theo tên, mã thuốc hoặc nhà cung cấp
+     var thuocsFound = db.tblThuocs
+                         .Where(t => t.stenThuoc.Contains(searchTerm) )
+                         .ToList();
+
+     // Trả về danh sách thuốc tìm thấy
+     return View("vThuoc", thuocsFound);
+ }
     }
 }
