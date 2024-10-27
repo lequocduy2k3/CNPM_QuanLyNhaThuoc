@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "vThuoc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 style="text-align:center; margin-bottom:20px;">Tìm kiếm thuốc khách hàng đã mua</h2>
+
+<form method="get" action="@Url.Action("TimKiemThuoc", "cHoaDon")" style="text-align:center; margin-bottom:30px;">
+    <label for="sdt">Nhập số điện thoại của khách hàng:</label>
+    <input type="text" id="sdt" name="sdt" value="@Request.QueryString["sdt"]" style="padding:5px; width:200px; margin-left:10px;" />
+    <button type="submit" style="padding:5px 10px;">Tìm kiếm</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p style="color:red; text-align:center;">@ViewBag.Message</p>
+}
+
+@if (ViewBag.KhachHang != null)
+{
+    <h3 style="text-align:center; margin-top:20px;">Thông tin khách hàng:</h3>
+    <p style="text-align:center;">Họ tên: @ViewBag.KhachHang.stenKH</p>
+    <p style="text-align:center;">Địa chỉ: @ViewBag.KhachHang.sDiaChi</p>
+
+    <h3 style="text-align:center; margin-top:20px;">Danh sách thuốc</h3>
+    <table style="margin: 0 auto; border-collapse: collapse; width: 80%;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="border: 1px solid #ddd; padding: 8px;">Tên Thuốc</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Số Lượng</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Giá Bán</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@item.TenThuoc</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@item.SoLuong</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@item.GiaBan</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
