@@ -1,5 +1,4 @@
-﻿
-@model List<BTL_Quanlynhathuoc.Models.tblThuoc>
+﻿@model List<BTL_Quanlynhathuoc.Models.tblThuoc>
 @{
     ViewBag.Title = "vDonThuoc";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -47,15 +46,15 @@
                     foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.imaHD</td>
-                            <td>@item.smaNV</td>
-                            <td>@item.smaKH</td>
-                            <td>@item.dNgayLapHD</td>
-                            <td>@item.dNgayGiaoHang</td>
-                            <td>@item.sDiaChiGH</td>
+                            <td>@item.smaThuoc</td> // Ensure this property exists in tblThuoc
+                            <td>@item.stenThuoc</td> // Ensure this property exists in tblThuoc
+                            <td>@item.smaNCC</td> // Ensure this property exists in tblThuoc
+                            <td>@item.isoLuong</td> // Ensure this property exists in tblThuoc
+                            <td>@item.smaLoaiThuoc</td> // Ensure this property exists in tblThuoc
+                            <td>@item.fgiaThuoc</td> // Ensure this property exists in tblThuoc
                             <td class="action-buttons">
-                                <button class="btn btn-secondary" onclick="onUpdate('@item.smaHD')">Sửa</button>
-                                <button class="btn btn-danger" onclick="confirmDelete('@item.smaHD', '@item.stenThuoc')">Xóa</button>
+                                <button class="btn btn-secondary" onclick="onUpdate('@item.smaThuoc')">Sửa</button>
+                                <button class="btn btn-danger" onclick="confirmDelete('@item.smaThuoc', '@item.stenThuoc')">Xóa</button>
                             </td>
                         </tr>
                     }
@@ -174,7 +173,7 @@ function resetError() {
     document.getElementById("errormgaygiaohang").innerHTML = "";
     document.getElementById("errordiachigh").innerHTML = "";
 }
-       
+
 
     $('#bookform').submit(function (event) {
     event.preventDefault(); // Ngăn chặn hành động mặc định của form
@@ -213,11 +212,11 @@ function resetError() {
 
             if (result.success) {
                 if (editMode === "true") {
-                    alert(`Đơn Thuốc ${imahd} đã được sửa thành công!`);
+                    alert(Đơn Thuốc ${imahd} đã được sửa thành công!);
                     // Cập nhật danh sách đơn thuốc
                     updateDrugList(result.donthuoc);
                 } else {
-                    alert(`Đơn Thuốc ${imahd} đã được thêm thành công!`);
+                    alert(Đơn Thuốc ${imahd} đã được thêm thành công!);
                     addToDrugList(result.donthuoc);
                 }
                 clearForm(); // Đóng modal và xóa form
@@ -251,7 +250,7 @@ function resetError() {
 function addToDrugList(thuoc) {
     const drugList = document.getElementById('thuocTable').getElementsByTagName('tbody')[0]; // Lấy phần tử tbody
     const newRow = document.createElement('tr'); // Tạo một dòng mới trong bảng
-    newRow.innerHTML = `
+    newRow.innerHTML =
         <td>${donthuoc.imahd}</td>
         <td>${donthuoc.smanv}</td>
         <td>${donthuoc.smakh}</td>
@@ -261,7 +260,7 @@ function addToDrugList(thuoc) {
         <td class="action-buttons">
             <button class="btn btn-secondary" onclick="onUpdate('${donthuoc.smahd}')">Sửa</button>
             <button class="btn btn-danger" onclick="confirmDelete('${donthuoc.smahd}')">Xóa</button>
-        </td> `;
+        </td> ;
     drugList.appendChild(newRow); // Thêm dòng mới vào danh sách đơn thuốc
 }
 
@@ -377,4 +376,3 @@ function checkContainString(string) {
 
 </body>
 </html>
-

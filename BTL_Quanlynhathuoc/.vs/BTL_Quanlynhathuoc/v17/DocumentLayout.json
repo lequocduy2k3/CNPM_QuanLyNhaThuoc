@@ -1,21 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\btluptogit\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\",
+  "WorkspaceRootPath": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|d:\\btluptogit\\cnpm_quanlynhathuoc\\btl_quanlynhathuoc\\btl_quanlynhathuoc\\controllers\\choadoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|c:\\users\\welcome to windows11\\onedrive\\documents\\github\\cnpm_quanlynhathuoc\\btl_quanlynhathuoc\\btl_quanlynhathuoc\\views\\vdonthuoc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|solutionrelative:btl_quanlynhathuoc\\views\\vdonthuoc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|c:\\users\\welcome to windows11\\onedrive\\documents\\github\\cnpm_quanlynhathuoc\\btl_quanlynhathuoc\\btl_quanlynhathuoc\\models\\tblthuoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|solutionrelative:btl_quanlynhathuoc\\models\\tblthuoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|c:\\users\\welcome to windows11\\onedrive\\documents\\github\\cnpm_quanlynhathuoc\\btl_quanlynhathuoc\\btl_quanlynhathuoc\\controllers\\cdonthuoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|solutionrelative:btl_quanlynhathuoc\\controllers\\cdonthuoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|c:\\users\\welcome to windows11\\onedrive\\documents\\github\\cnpm_quanlynhathuoc\\btl_quanlynhathuoc\\btl_quanlynhathuoc\\models\\tbldonthuoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|solutionrelative:btl_quanlynhathuoc\\models\\tbldonthuoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|c:\\users\\welcome to windows11\\onedrive\\documents\\github\\cnpm_quanlynhathuoc\\btl_quanlynhathuoc\\btl_quanlynhathuoc\\controllers\\choadoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|solutionrelative:btl_quanlynhathuoc\\controllers\\choadoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|d:\\btluptogit\\cnpm_quanlynhathuoc\\btl_quanlynhathuoc\\btl_quanlynhathuoc\\views\\choadon\\timkiemthuoc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\btl_quanlynhathuoc\\views\\choadon\\timkiemthuoc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|solutionrelative:btl_quanlynhathuoc\\views\\choadon\\timkiemthuoc.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|d:\\btluptogit\\cnpm_quanlynhathuoc\\btl_quanlynhathuoc\\btl_quanlynhathuoc\\controllers\\cthuoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\btl_quanlynhathuoc\\controllers\\cthuoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|solutionrelative:btl_quanlynhathuoc\\controllers\\cthuoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|d:\\btluptogit\\cnpm_quanlynhathuoc\\btl_quanlynhathuoc\\btl_quanlynhathuoc\\models\\donthuocviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\btl_quanlynhathuoc\\models\\donthuocviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{88E005DE-3898-494F-A5AD-471AACDCF40C}|BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc.csproj|solutionrelative:btl_quanlynhathuoc\\models\\donthuocviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,8 +42,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 8,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "tblThuoc.cs",
+              "DocumentMoniker": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Models\\tblThuoc.cs",
+              "RelativeDocumentMoniker": "BTL_Quanlynhathuoc\\Models\\tblThuoc.cs",
+              "ToolTip": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Models\\tblThuoc.cs",
+              "RelativeToolTip": "BTL_Quanlynhathuoc\\Models\\tblThuoc.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T10:16:12.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "tblDonThuoc.cs",
+              "DocumentMoniker": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Models\\tblDonThuoc.cs",
+              "RelativeDocumentMoniker": "BTL_Quanlynhathuoc\\Models\\tblDonThuoc.cs",
+              "ToolTip": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Models\\tblDonThuoc.cs",
+              "RelativeToolTip": "BTL_Quanlynhathuoc\\Models\\tblDonThuoc.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAqwCEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T10:13:51.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "cDonThuocController.cs",
+              "DocumentMoniker": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cDonThuocController.cs",
+              "RelativeDocumentMoniker": "BTL_Quanlynhathuoc\\Controllers\\cDonThuocController.cs",
+              "ToolTip": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cDonThuocController.cs",
+              "RelativeToolTip": "BTL_Quanlynhathuoc\\Controllers\\cDonThuocController.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAewFAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T10:11:08.791Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
@@ -50,24 +105,36 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TimKiemThuoc.cshtml",
-              "DocumentMoniker": "D:\\btluptogit\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Views\\cHoaDon\\TimKiemThuoc.cshtml",
-              "RelativeDocumentMoniker": "BTL_Quanlynhathuoc\\Views\\cHoaDon\\TimKiemThuoc.cshtml",
-              "ToolTip": "D:\\btluptogit\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Views\\cHoaDon\\TimKiemThuoc.cshtml",
-              "RelativeToolTip": "BTL_Quanlynhathuoc\\Views\\cHoaDon\\TimKiemThuoc.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABFAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "vDonThuoc.cshtml",
+              "DocumentMoniker": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Views\\vDonThuoc.cshtml",
+              "RelativeDocumentMoniker": "BTL_Quanlynhathuoc\\Views\\vDonThuoc.cshtml",
+              "ToolTip": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Views\\vDonThuoc.cshtml",
+              "RelativeToolTip": "BTL_Quanlynhathuoc\\Views\\vDonThuoc.cshtml",
+              "ViewState": "AgIAABoAAAAAAAAAAAAYwDgAAABlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-27T03:18:13.014Z",
+              "WhenOpened": "2024-10-28T10:11:19.887Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "TimKiemThuoc.cshtml",
+              "DocumentMoniker": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Views\\cHoaDon\\TimKiemThuoc.cshtml",
+              "RelativeDocumentMoniker": "BTL_Quanlynhathuoc\\Views\\cHoaDon\\TimKiemThuoc.cshtml",
+              "ToolTip": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Views\\cHoaDon\\TimKiemThuoc.cshtml",
+              "RelativeToolTip": "BTL_Quanlynhathuoc\\Views\\cHoaDon\\TimKiemThuoc.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-27T03:18:13.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "cHoaDonController.cs",
-              "DocumentMoniker": "D:\\btluptogit\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cHoaDonController.cs",
+              "DocumentMoniker": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cHoaDonController.cs",
               "RelativeDocumentMoniker": "BTL_Quanlynhathuoc\\Controllers\\cHoaDonController.cs",
-              "ToolTip": "D:\\btluptogit\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cHoaDonController.cs",
+              "ToolTip": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cHoaDonController.cs",
               "RelativeToolTip": "BTL_Quanlynhathuoc\\Controllers\\cHoaDonController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -76,29 +143,27 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "cThuocController.cs",
-              "DocumentMoniker": "D:\\btluptogit\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cThuocController.cs",
+              "DocumentMoniker": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cThuocController.cs",
               "RelativeDocumentMoniker": "BTL_Quanlynhathuoc\\Controllers\\cThuocController.cs",
-              "ToolTip": "D:\\btluptogit\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cThuocController.cs",
+              "ToolTip": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Controllers\\cThuocController.cs",
               "RelativeToolTip": "BTL_Quanlynhathuoc\\Controllers\\cThuocController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T03:16:28.234Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-27T03:16:28.234Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "DonThuocViewModel.cs",
-              "DocumentMoniker": "D:\\btluptogit\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Models\\DonThuocViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Models\\DonThuocViewModel.cs",
               "RelativeDocumentMoniker": "BTL_Quanlynhathuoc\\Models\\DonThuocViewModel.cs",
-              "ToolTip": "D:\\btluptogit\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Models\\DonThuocViewModel.cs",
+              "ToolTip": "C:\\Users\\Welcome to Windows11\\OneDrive\\Documents\\GitHub\\CNPM_QuanLyNhaThuoc\\BTL_Quanlynhathuoc\\BTL_Quanlynhathuoc\\Models\\DonThuocViewModel.cs",
               "RelativeToolTip": "BTL_Quanlynhathuoc\\Models\\DonThuocViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T03:16:16.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-27T03:16:16.125Z"
             }
           ]
         }

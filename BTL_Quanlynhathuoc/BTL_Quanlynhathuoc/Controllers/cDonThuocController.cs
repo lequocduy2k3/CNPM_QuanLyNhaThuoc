@@ -23,9 +23,8 @@ namespace BTL_Quanlynhathuoc.Controllers
         // Hiển thị trang quản lý đơn đơn thuốc
         public ActionResult vDonThuoc()
         {
-
             var DonThuocs = db.tblDonThuocs.ToList(); // Lấy danh sách đơn thuốc
-            return View(Donthuocs); // Trả về view vDonThuoc.cshtml
+            return View(DonThuocs); // Trả về view vDonThuoc.cshtml
         }
 
         // Thêm đơn thuốc mới
@@ -41,7 +40,7 @@ namespace BTL_Quanlynhathuoc.Controllers
                 }
 
                 // Kiểm tra mã hoá đơn đã tồn tại
-                if (db.tblDonThuocs.Any(t => t.sMaHD == DonThuoc.sMaHD))
+                if (db.tblDonThuocs.Any(t => t.sMaHD == DonThuoc.sMaHD)) // Check if sMaHD exists
                 {
                     return Json(new { success = false, error = "Mã hoá đơn đã tồn tại." });
                 }
@@ -52,15 +51,15 @@ namespace BTL_Quanlynhathuoc.Controllers
                 {
                     return Json(new { success = false, error = "Mã khách hàng không hợp lệ." });
                 }
-                if (db.tblDonThuocs.Any(t => t.dNgayLapHD == null ))
+                if (db.tblDonThuocs.Any(t => t.dNgayLapHD == null)) // Check if dNgayLapHD exists
                 {
                     return Json(new { success = false, error = "Ngày lập hoá đơn không hợp lệ." });
                 }
-                if (db.tblDonThuocs.Any(t => t.dNgayGiaoHang == null ))
+                if (db.tblDonThuocs.Any(t => t.dNgayGiaoHang == null)) // Check if dNgayGiaoHang exists
                 {
                     return Json(new { success = false, error = "Ngày giao hàng không hợp lệ." });
                 }
-                if (db.tblDonThuocs.Any(t => t.sDiaChiGH == null ))
+                if (db.tblDonThuocs.Any(t => t.sDiaChiGH == null)) // Check if sDiaChiGH exists
                 {
                     return Json(new { success = false, error = "Địa chỉ giao hàng không hợp lệ." });
                 }
@@ -74,12 +73,12 @@ namespace BTL_Quanlynhathuoc.Controllers
                     success = true,
                     DonThuoc = new
                     {
-                        DonThuoc.smaHD,
+                        DonThuoc.imaHD, // Ensure this property exists
                         DonThuoc.smaNV,
                         DonThuoc.smaKH,
-                        DonThuoc.dNgayLapHD,
-                        DonThuoc.dNgayGiaoHang,
-                        DonThuoc.sDiachiGH
+                        DonThuoc.dNgayLapHD, // Ensure this property exists
+                        DonThuoc.dNgayGiaoHang, // Ensure this property exists
+                        DonThuoc.sDiachiGH // Ensure this property exists
                     }
                 });
             }
@@ -89,3 +88,5 @@ namespace BTL_Quanlynhathuoc.Controllers
                 return Json(new { success = false, error = "Lỗi khi thêm đơn thuốc: " + ex.Message });
             }
         }
+    }
+}
