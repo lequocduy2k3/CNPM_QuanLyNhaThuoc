@@ -1,0 +1,326 @@
+﻿@model List<BTL_Quanlynhathuoc.Models.tblDonThuoc>
+
+@{
+    ViewBag.Title = "vHoaDon";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Quản lý Đơn Thuốc</title>
+    <link href="~/Front-end/css/book.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Quản lý đơn Thuốc</h1>
+        <form action="@Url.Action("Search", "cHoaDon")" method="get">
+            <div class="book-actions">
+                <div class="search-bar">
+                    <input type="text" id="searchPhone" name="searchPhone" value="@ViewBag.SearchPhone" placeholder="Nhập số điện thoại khách hàng...">
+                    <button id="searchBtn" type="submit" class="btn btn-secondary">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+
+        <div style="display: flex; justify-content: end; margin: 16px 0;">
+            <button id="addBookBtn" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm đơn Thuốc Mới</button>
+        </div>
+
+        <table class="book-table" id="thuocTable">
+            <thead>
+                <tr>
+                    <th>Mã hoá đơn</th>
+                    <th>Mã nhân viên</th>
+                    <th>Mã khách hàng</th>
+                    <th>Ngày lập hoá đơn</th>
+                    <th>Ngày giao hàng</th>
+                    <th>Địa chỉ giao hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.imaHD</td>
+                            <td>@item.smaNV</td>
+                            <td>@item.smaKH</td>
+                            <td>@item.dngayLapHD</td>
+                            <td>@item.dngayGiaoHang</td>
+                            <td>@item.sDiaChiGH</td>
+                            <td class="action-buttons">
+                                <button class="btn btn-secondary" onclick="onUpdate('@item.imaHD')">Sửa</button>
+                                <button class="btn btn-danger" onclick="confirmDelete('@item.imaHD')">Xóa</button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7">Không tìm thấy đơn thuốc cần tìm!</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <button class="btn btn-secondary" id="prevPage">Trước</button>
+            <span id="currentPage">Trang 1</span>
+            <button class="btn btn-secondary" id="nextPage">Sau</button>
+        </div>
+    </div>
+
+    <!-- Modal thêm/sửa đơn thuốc -->
+    <div id="donthuocmodal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modaltitle" class="mb-2">Thêm đơn Thuốc Mới</h2>
+            <form action="@Url.Action("Add", "cHoaDon")" id="bookform" method="post">
+                <input type="hidden" id="editMode" name="editMode" value="false">
+
+                <p class="label">Mã hoá đơn:</p>
+                <input type="text" id="imahd" name="imahd" placeholder="Nhập mã hoá đơn" oninput="validateInput(event)" maxlength="10">
+                <p id="errormahd" class="error"></p>
+
+                <p class="label">Mã nhân viên:</p>
+                <input type="text" id="smanv" name="smanv" placeholder="Nhập mã nhân viên" maxlength="100">
+                <p id="errormanv" class="error"></p>
+
+                <p class="label">Mã khách hàng:</p>
+                <input type="text" id="smakh" name="smakh" placeholder="Nhập mã khách hàng" maxlength="100">
+                <p id="errormakh" class="error"></p>
+
+                <p class="label">Ngày lập hoá đơn:</p>
+                <input type="text" id="dngaylaphd" name="dngaylaphd" placeholder="dd/MM/yyyy">
+                <p id="errorngaylaphd" class="error"></p>
+
+                <p class="label">Ngày giao hàng:</p>
+                <input type="text" id="dngaygiaohang" name="dngaygiaohang" placeholder="dd/MM/yyyy">
+                <p id="errorngaygiaohang" class="error"></p>
+
+                <p class="label">Địa chỉ giao hàng:</p>
+                <input type="text" id="sdiachigh" name="sdiachigh" placeholder="Nhập Địa chỉ giao hàng" maxlength="100">
+                <p id="errordiachigh" class="error"></p>
+
+                <div class="form-buttons">
+                    <button type="submit" id="thuocmodalbtn" class="btn btn-primary">Thêm</button>
+                    <button type="button" class="btn btn-secondary close-btn">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+     $(document).ready(function () {
+            // Mở modal khi nhấn nút "Thêm đơn Thuốc"
+            $('#addBookBtn').click(function () {
+                clearForm();
+                resetError();
+                $('#donthuocmodal').css('display', 'block');
+            });
+
+            // Đóng modal khi nhấn nút đóng hoặc bên ngoài modal
+            $('.close, .close-btn').click(function () {
+                clearForm();
+                resetError();
+                $('#donthuocmodal').css('display', 'none');
+            });
+            $(window).click(function (event) {
+                if (event.target.id === 'donthuocmodal') {
+                    clearForm();
+                    resetError();
+                    $('#donthuocmodal').css('display', 'none');
+                }
+            });
+        });
+
+        function clearForm() {
+            $('#imahd, #smanv, #smakh, #dngaylaphd, #dngaygiaohang, #sdiachigh').val('');
+            $('#modaltitle').text("Thêm đơn Thuốc Mới");
+            $('#bookform').attr('action', '@Url.Action("Add", "cHoaDon")');
+            $('#thuocmodalbtn').text("Thêm");
+            $('#editMode').val("false");
+        }
+
+        function resetError() {
+            $('.error').text('');
+        }
+
+        $('#bookform').submit(function (event) {
+            event.preventDefault();
+            resetError();
+
+            let isValid = checkValid();
+            if (!isValid) return;
+
+            let formData = {
+                imahd: $('#imahd').val(),
+                smanv: $('#smanv').val(),
+                smakh: $('#smakh').val(),
+                dngaylaphd: $('#dngaylaphd').val(),
+                dngaygiaohang: $('#dngaygiaohang').val(),
+                sdiachigh: $('#sdiachigh').val()
+            };
+            let url = $('#editMode').val() === "true" ? '@Url.Action("Update", "cHoaDon")' : '@Url.Action("Add", "cHoaDon")';
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        alert(`Đơn Thuốc ${formData.imahd} đã được cập nhật!`);
+                        $('#donthuocmodal').css('display', 'none');
+                    } else {
+                        alert(response.error || 'Không thể hoàn thành yêu cầu!');
+                    }
+                },
+                error: function (xhr) {
+                    alert('Không thể hoàn thành yêu cầu!');
+                }
+            });
+        });
+
+        function addToTable(formData) {
+            let table = $('#thuocTable tbody'); // Chọn tbody của bảng
+            let newRow = `
+        <tr>
+            <td>${formData.imahd}</td>
+            <td>${formData.smanv}</td>
+            <td>${formData.smakh}</td>
+            <td>${formData.dngaylaphd}</td>
+            <td>${formData.dngaygiaohang}</td>
+            <td>${formData.sdiachigh}</td>
+            <td><button class="edit-btn">Sửa</button></td>
+        </tr>
+    `;
+            table.append(newRow); // Thêm dòng mới vào bảng
+        }
+
+// Hàm thêm thuốc vào danh sách
+
+       function checkValid() {
+           let imahd = document.getElementById('imahd'); // Mã hoá đơn
+           let smanv = document.getElementById('smanv'); // Mã nhân viên
+           let smakh = document.getElementById('smakh'); // Mã khách hàng
+           let dngaylaphd = document.getElementById('dngaylaphd'); // Ngày lập hoá đơn
+           let dngaygiaohang = document.getElementById('dngaygiaohang'); // Ngày giao hàng
+           let sdiachigh = document.getElementById('sdiachigh'); // Địa chỉ giao hàng
+           let isValid = true;
+
+           // Xóa thông báo lỗi cũ
+           resetError();
+
+    // Xóa thông báo lỗi cũ
+    document.getElementById("errormahd").innerHTML = "";
+    document.getElementById("errormanv").innerHTML = "";
+    document.getElementById("errormakh").innerHTML = "";
+    document.getElementById("errorngaylaphd").innerHTML = "";
+    document.getElementById("errorngaygiaohang").innerHTML = "";
+    document.getElementById("errordiachigh").innerHTML = "";
+
+           // Kiểm tra mã hoá đơn
+           if (!imahd.value.trim()) {
+               isValid = false;
+               document.getElementById("errormahd").innerHTML = "Vui lòng nhập mã hoá đơn";
+           } else if (!checkLetterAndNumber(imahd.value.trim())) {
+               isValid = false;
+               document.getElementById("errormahd").innerHTML = "Mã hóa đơn không đúng định dạng";
+           }
+
+           // Kiểm tra mã nhân viên
+           if (!smanv.value.trim()) {
+               isValid = false;
+               document.getElementById("errormanv").innerHTML = "Vui lòng nhập mã nhân viên";
+           } else if (!checkContainString(smanv.value.trim()) || checkContainSpecialCharacter(smanv.value.trim())) {
+               isValid = false;
+               document.getElementById("errormanv").innerHTML = "Mã nhân viên không đúng định dạng";
+           }
+
+           // Kiểm tra mã khách hàng
+           if (!smakh.value.trim()) {
+               isValid = false;
+               document.getElementById("errormakh").innerHTML = "Vui lòng nhập mã khách hàng";
+           } else if (!checkLetterAndNumber(smakh.value.trim())) {
+               isValid = false;
+               document.getElementById("errormakh").innerHTML = "Mã khách hàng không đúng định dạng";
+           }
+           // Kiểm tra các trường nhập liệu...
+           if (!dngaylaphd.value.trim()) {
+               isValid = false;
+               document.getElementById("errorngaylaphd").innerHTML = "Vui lòng nhập ngày lập hoá đơn";
+           } else if (!checkValidDate(dngaylaphd.value.trim())) {
+               isValid = false;
+               document.getElementById("errorngaylaphd").innerHTML = "Ngày lập hoá đơn không đúng định dạng ";
+           }
+
+           if (!dngaygiaohang.value.trim()) {
+               isValid = false;
+               document.getElementById("errorngaygiaohang").innerHTML = "Vui lòng nhập ngày giao hàng";
+           } else if (!checkValidDate(dngaygiaohang.value.trim())) {
+               isValid = false;
+               document.getElementById("errorngaygiaohang").innerHTML = "Ngày giao hàng không đúng định dạng ";
+           }
+
+           if (!sdiachigh.value.trim()) {
+               isValid = false;
+               document.getElementById("errordiachigh").innerHTML = "Vui lòng nhập địa chỉ giao hàng";
+           } else {
+               document.getElementById("errordiachigh").innerHTML = ""; // Xóa thông báo lỗi nếu không có lỗi
+           }
+
+           return isValid;
+       }
+        function checkValidDate(dateString) {
+            // Kiểm tra định dạng dd/MM/yyyy
+            const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4})$/;
+            if (!regex.test(dateString)) {
+                return false; // Ngày không đúng định dạng
+            }
+
+            // Tách ngày, tháng và năm từ chuỗi
+            const [day, month, year] = dateString.split("/").map(Number);
+
+            // Kiểm tra tính hợp lệ của ngày tháng
+            const date = new Date(year, month - 1, day);
+            return (
+                date.getFullYear() === year &&
+                date.getMonth() === month - 1 &&
+                date.getDate() === day
+            );
+        }
+
+
+        function validateInput(event) {
+            const input = event.target;
+            const regex = /^[a-zA-Z0-9]{0,10}$/;
+
+            if (!regex.test(input.value)) {
+                input.value = input.value.slice(0, -1); // Loại bỏ ký tự cuối cùng
+            }
+        }
+
+        function checkLetterAndNumber(string) {
+            const regex = /^[a-zA-Z0-9\s]+$/; // Cho phép chữ, số, và khoảng trắng
+            return regex.test(string);
+        }
+
+        function checkContainString(string) {
+            const regex = /[a-zA-Z]/;
+            return regex.test(string);
+        }
+
+        function checkContainSpecialCharacter(string) {
+            const regex = /[!@@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~]/;
+            return regex.test(string);
+        }
+    </script>
+
+</body>
+</html>

@@ -77,7 +77,13 @@ h1 {
     background-color: #2ecc71;
     color: #fff;
 }
+#nextPage {
+    background-color: #555050;
+}
 
+#prevPage {
+    background-color: #555050;
+}
 .btn-danger {
     background-color: #e74c3c;
     color: #fff;

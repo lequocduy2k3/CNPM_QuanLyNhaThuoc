@@ -16,7 +16,7 @@ namespace BTL_Quanlynhathuoc
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "cThuoc", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "cHoaDon", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
